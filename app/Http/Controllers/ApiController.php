@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Radio;
+use App\Models\socialMedia;
+use App\Models\schedule;
+
 
 class ApiController extends Controller
 {
@@ -80,6 +83,56 @@ class ApiController extends Controller
             return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
         }
     }
+
+	public function socialMedia()
+    {
+    	try
+    	{
+    		if(count(socialMedia()) > 0)
+    		{
+    			return response()->json(['success'=>true, 'message'=>'Data found', 'total'=>count(socialMedia()), 'data'=>socialMedia()]);
+    		}
+    		return response()->json(['success'=>false, 'message'=>'No data found', 'total'=>count(socialMedia()), 'data'=>socialMedia()]);
+    	}catch(Exception $e){
+
+            $code = $e->getCode();           
+            return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
+        }
+    }
+
+
+	public function schedule()
+    {
+    	try
+    	{
+    		if(count(schedule()) > 0)
+    		{
+    			return response()->json(['success'=>true, 'message'=>'Data found', 'total'=>count(schedule()), 'data'=>schedule()]);
+    		}
+    		return response()->json(['success'=>false, 'message'=>'No data found', 'total'=>count(schedule()), 'data'=>schedule()]);
+    	}catch(Exception $e){
+
+            $code = $e->getCode();           
+            return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
+        }
+    }
+
+	public function podcast()
+    {
+    	try
+    	{
+    		if(count(podcast()) > 0)
+    		{
+    			return response()->json(['success'=>true, 'message'=>'Data found', 'total'=>count(podcast()), 'data'=>podcast()]);
+    		}
+    		return response()->json(['success'=>false, 'message'=>'No data found', 'total'=>count(podcast()), 'data'=>podcast()]);
+    	}catch(Exception $e){
+
+            $code = $e->getCode();           
+            return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
+        }
+    }
+
 
     public function ads()
     {

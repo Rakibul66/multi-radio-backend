@@ -68,6 +68,63 @@ $(document).ready(function(){
     });
 
 
+    var scheduleTable = $('#schedule-table').DataTable({
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        responsive: true,
+        stateSave: true,
+        ajax: {
+          url: base_url+"/schedule",
+        },
+
+        columns: [
+            {data: 'schedule_name', name: 'schedule_name'},
+            {data: 'image', name: 'image'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+
+    var socialMediaTable = $('#socialmedia-table').DataTable({
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        responsive: true,
+        stateSave: true,
+        ajax: {
+          url: base_url+"/socialmedia",
+        },
+
+        columns: [
+            {data: 'social_media_name', name: 'social_media_name'},
+            {data: 'social_media_url', name: 'social_media_url'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+
+    var podcast = $('#podcast-table').DataTable({
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        responsive: true,
+        stateSave: true,
+        ajax: {
+          url: base_url+"/podcast",
+        },
+
+        columns: [
+            {data: 'name', name: 'name'},
+            {data: 'logo', name: 'logo'},
+            {data: 'link', name: 'link'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
    var radioTable = $('#radio-table').DataTable({
         searching: true,
         processing: true,
@@ -129,6 +186,69 @@ $(document).ready(function(){
           if(confirm('Do you want to delete this?'))
           {
               ajax_url = base_url+"/countries/"+int_country_id;
+             $.ajax({
+
+                     url: ajax_url,
+                     type:"DELETE",
+                     dataType:"json",
+                     success:function(data) {
+                        $('.data-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+
+                     },
+                            
+                });
+          }
+    });
+
+    $(document).on('click', '.delete-socialmedia', function(e){
+        e.preventDefault();
+        var int_socialmedia_id = $(this).data('id');
+          if(confirm('Do you want to delete this?'))
+          {
+              ajax_url = base_url+"/socialmedia/"+int_socialmedia_id;
+             $.ajax({
+
+                     url: ajax_url,
+                     type:"DELETE",
+                     dataType:"json",
+                     success:function(data) {
+                        $('.data-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+
+                     },
+                            
+                });
+          }
+    });
+
+    $(document).on('click', '.delete-podcast', function(e){
+        e.preventDefault();
+        var int_podcast_id = $(this).data('id');
+          if(confirm('Do you want to delete this?'))
+          {
+              ajax_url = base_url+"/podcast/"+int_podcast_id;
+             $.ajax({
+
+                     url: ajax_url,
+                     type:"DELETE",
+                     dataType:"json",
+                     success:function(data) {
+                        $('.data-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+
+                     },
+                            
+                });
+          }
+    });
+
+    $(document).on('click', '.delete-schedule', function(e){
+        e.preventDefault();
+        var int_schedule_id = $(this).data('id');
+          if(confirm('Do you want to delete this?'))
+          {
+              ajax_url = base_url+"/schedule/"+int_schedule_id;
              $.ajax({
 
                      url: ajax_url,

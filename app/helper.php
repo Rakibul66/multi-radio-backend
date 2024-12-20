@@ -3,6 +3,10 @@
  use App\Models\Country;
  use App\Models\Radio;
  use App\Models\Setting;
+ use App\Models\Schedule;
+ use App\Models\SocialMedia;
+ use App\Models\Podcast;
+
 
  function countCategory()
  {
@@ -14,6 +18,13 @@
  function countCountry()
  {
  	$count = Country::count();
+ 	$count+=1;
+ 	return $count;
+ }
+
+ function countSchedule()
+ {
+ 	$count = Schedule::count();
  	$count+=1;
  	return $count;
  }
@@ -35,6 +46,24 @@
  {
  	$countries = Country::where('status','Active')->latest()->get();
  	return $countries;
+ }
+
+ function socialMedia()
+ {
+ 	$socialMedia = SocialMedia::latest()->get();
+ 	return $socialMedia;
+ }
+
+ function schedule()
+ {
+ 	$schedule = Schedule::latest()->get();
+ 	return $schedule;
+ }
+
+ function podcast()
+ {
+ 	$podcast = Podcast::latest()->get();
+ 	return $podcast;
  }
 
  function setting()

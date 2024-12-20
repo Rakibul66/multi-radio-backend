@@ -8,6 +8,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\RadioController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PodcastController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +44,14 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
   Route::resource('countries', CountryController::class);
 
+  //Social Media
+  Route::resource('socialmedia', SocialMediaController::class);
+
+  //Schedule
+  Route::resource('schedule', ScheduleController::class);
+
+  //podcast
+  Route::resource('podcast',PodcastController::class);
 
  //radios
   Route::resource('radios', RadioController::class);

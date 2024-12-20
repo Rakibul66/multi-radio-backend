@@ -205,6 +205,81 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Social Media
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('socialmedia.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Social Media</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('socialmedia.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Social Media</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Schedule
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('schedule.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Schedule</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('schedule.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Schedules</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Podcast
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('podcast.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Podcast</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('podcast.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Podcasts</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Settings

@@ -22,3 +22,11 @@ Route::get('/ads', [ApiController::class, 'ads']);
 
 
 Route::post('radios', [ApiController::class, 'radios']);
+
+
+Route::get('/schedule', [ApiController::class, 'schedule']);
+
+Route::get('/social-media', [ApiController::class, 'socialMedia']);
+
+Route::get('/podcast', [ApiController::class, 'podcast']);
+

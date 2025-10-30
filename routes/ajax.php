@@ -9,3 +9,5 @@
  Route::post('country-status-update', [AjaxController::class, 'countryStatusUpdate']);
 
  Route::post('radio-status-update', [AjaxController::class, 'radioStatusUpdate']);
+
+ Route::post('music-status-update', [AjaxController::class, 'musicStatusUpdate']);

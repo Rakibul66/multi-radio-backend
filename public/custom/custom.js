@@ -158,6 +158,69 @@ $(document).ready(function(){
     });
 
 
+   var musicTable = $('#music-table').DataTable({
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        responsive: true,
+        stateSave: true,
+        ajax: {
+          url: base_url+"/musics",
+        },
+
+        columns: [
+            {data: 'title', name: 'title'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+
+   $(document).on('click', '#status-music-update', function(){
+         var music_id = $(this).data('id');
+         var isMusicchecked = $(this).prop('checked');
+         var status_val = isMusicchecked ? 'Active' : 'Inactive'; 
+         $.ajax({
+
+                     url: base_url+"/music-status-update",
+                     type:"POST",
+                     data:{'music_id':music_id, 'status':status_val},
+                     dataType:"json",
+                     success:function(data) {
+
+                        toastr.success(data.message);
+
+                        $('.data-table').DataTable().ajax.reload(null, false);
+
+                     },
+                            
+        });
+    }); 
+
+
+   $(document).on('click', '.delete-music', function(e){
+        e.preventDefault();
+        var int_music_id = $(this).data('id');
+          if(confirm('Do you want to delete this?'))
+          {
+              ajax_url = base_url+"/musics/"+int_music_id;
+             $.ajax({
+
+                     url: ajax_url,
+                     type:"DELETE",
+                     dataType:"json",
+                     success:function(data) {
+                        $('.data-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+
+                     },
+                            
+                });
+          }
+    });
+
+
     $(document).on('click', '.delete-category', function(e){
     	e.preventDefault();
     	var int_category_id = $(this).data('id');

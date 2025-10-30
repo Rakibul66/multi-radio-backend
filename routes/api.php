@@ -30,3 +30,4 @@ Route::get('/social-media', [ApiController::class, 'socialMedia']);
 
 Route::get('/podcast', [ApiController::class, 'podcast']);
 
+Route::get('/musics', [ApiController::class, 'musics']);

@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Radio;
 use App\Models\socialMedia;
 use App\Models\schedule;
+use DB;
 
 
 class ApiController extends Controller
@@ -150,6 +151,27 @@ class ApiController extends Controller
                     $string = $e->__toString();       
                     return response()->json(['message'=>$message, 'execption_code'=>$code, 'execption_string'=>$string]);
                     exit;
+        }
+    }
+
+    public function musics(Request $request)
+    {
+        try
+        {
+            $query = DB::table('music');
+            if($request->has('search'))
+            {
+                $search = $request->get('search');
+                $query->where('title', 'LIKE', "%$search%");
+            }
+            $musics = $query->where('status','Active')->orderBy('id','DESC')->get();
+            return response()->json(['status'=>count($musics) > 0, 'data'=>$musics]);
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 }

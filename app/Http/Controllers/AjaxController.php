@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Radio;
+use App\Models\Music;
+use DB;
+
 class AjaxController extends Controller
 {
     public function categoryStatusUpdate(Request $request)
@@ -45,6 +48,21 @@ class AjaxController extends Controller
             $radio = Radio::findorfail($request->radio_id);
             $radio->status = $request->status;
             $radio->update();
+            return response()->json(['success'=>true, 'message'=>'Succfully the status has been updated']);
+        }catch(Exception $e){
+
+            $code = $e->getCode();           
+            return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
+        }
+    }
+
+    public function musicStatusUpdate(Request $request)
+    {
+        try
+        {
+            DB::table('music')->where('id',$request->music_id)->update([
+                'status' => $request->status
+            ]);
             return response()->json(['success'=>true, 'message'=>'Succfully the status has been updated']);
         }catch(Exception $e){
 

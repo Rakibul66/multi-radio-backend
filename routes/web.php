@@ -11,6 +11,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\MusicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,9 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
  //radios
   Route::resource('radios', RadioController::class);
+
+ //musics
+  Route::resource('musics', MusicController::class);
 
   //settings
 

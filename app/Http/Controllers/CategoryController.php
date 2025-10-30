@@ -94,7 +94,7 @@ class CategoryController extends Controller
                 'messege' => "Successfully a category has been added",
                 'alert-type' => 'success'
             );
-         return Redirect()->back()->with($notification);
+            return Redirect()->back()->with($notification);
 
         }catch(Exception $e){
 

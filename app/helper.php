@@ -7,6 +7,11 @@
  use App\Models\SocialMedia;
  use App\Models\Podcast;
 
+ function user()
+ {
+    $user = auth()->user();
+    return $user;
+ }
 
  function countCategory()
  {

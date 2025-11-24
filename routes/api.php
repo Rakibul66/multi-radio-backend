@@ -38,6 +38,8 @@ Route::post('user-login', [ApiController::class, 'userLogin']);
 
 Route::post('top-videos', [ApiController::class, 'topVideos']);
 
+Route::post('videos', [ApiController::class, 'videos']);
+
 Route::middleware('auth:sanctum')->group( function () {
 	Route::get('/musics', [ApiController::class, 'musics']);
 	Route::post('user-logout', [ApiController::class, 'userLogout']);

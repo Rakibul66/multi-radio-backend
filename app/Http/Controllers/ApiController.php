@@ -280,4 +280,24 @@ class ApiController extends Controller
             ], 500);
         }
     }
+
+    public function videos(Request $request)
+    {
+        try
+        {
+            $query = Video::query();
+            if($request->has('category_id'))
+            {
+                $query->where('category_id',$request->category_id);
+            }
+            $videos = $query->with('category')->where('status','Active')->latest()->get();
+            return response()->json(['status'=>count($videos) > 0, 'data'=>$videos]);
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

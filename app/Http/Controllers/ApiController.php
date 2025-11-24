@@ -171,7 +171,7 @@ class ApiController extends Controller
             {
                 $query->where('category_id',$request->category_id);
             }
-            $musics = $query->where('status','Active')->orderBy('id','DESC')->get();
+            $musics = $query->with('category')->where('status','Active')->orderBy('id','DESC')->get();
             return response()->json(['status'=>count($musics) > 0, 'data'=>$musics]);
         }catch (Exception $e) {
             return response()->json([

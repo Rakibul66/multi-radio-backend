@@ -8,8 +8,10 @@ use App\Models\Country;
 use App\Models\Radio;
 use App\Models\socialMedia;
 use App\Models\schedule;
+use App\Models\User;
 use DB;
-
+use Validator;
+use Auth;
 
 class ApiController extends Controller
 {
@@ -166,6 +168,90 @@ class ApiController extends Controller
             }
             $musics = $query->where('status','Active')->orderBy('id','DESC')->get();
             return response()->json(['status'=>count($musics) > 0, 'data'=>$musics]);
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function userRegister(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:50',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string',
+                'confirm_password' => 'required|string|same:password'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false, 
+                    'message' => 'Please fill all requirement fields', 
+                    'data' => $validator->errors()
+                ], 422);  
+            }
+
+            $user = new User();
+            $user->role_id = 2;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return response()->json(['status'=>true, 'user_id'=>intval($user->id), 'message'=>"Successfully register"]);
+
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function userLogin(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false, 
+                    'message' => 'Please fill all requirement fields', 
+                    'data' => $validator->errors()
+                ], 422);  
+            }
+
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+                $user = auth()->user();
+                $token = $user->createToken('MyApp')->plainTextToken;
+                return response()->json(['status'=>true, 'message'=>'Successfully Logged IN', 'token'=>$token, 'user'=>$user]);
+            }
+            return response()->json(['status'=>false, 'message'=>'Invalid Email or Password', 'token'=>"", 'user'=> new \stdClass()],401);
+
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function userLogout(Request $request)
+    {
+        try
+        {
+            auth()->user()->tokens()->delete();
+            return response()->json(['status'=>true, 'message'=>'Successfully Logged Out']);
         }catch (Exception $e) {
             return response()->json([
                 'status'  => false,

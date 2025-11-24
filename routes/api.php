@@ -30,4 +30,13 @@ Route::get('/social-media', [ApiController::class, 'socialMedia']);
 
 Route::get('/podcast', [ApiController::class, 'podcast']);
 
-Route::get('/musics', [ApiController::class, 'musics']);
+//Route::get('/musics', [ApiController::class, 'musics']);
+
+Route::post('user-register', [ApiController::class, 'userRegister']);
+
+Route::post('user-login', [ApiController::class, 'userLogin']);
+
+Route::middleware('auth:sanctum')->group( function () {
+	Route::get('/musics', [ApiController::class, 'musics']);
+	Route::post('user-logout', [ApiController::class, 'userLogout']);
+});

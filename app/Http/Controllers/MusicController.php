@@ -25,7 +25,7 @@ class MusicController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $musics = DB::table('music')->select('*');
+            $musics = DB::table('music')->join('categories','music.category_id','categories.id')->select('music.id','music.title','music.description','music.file','music.image','music.status','categories.category_name');
             return DataTables::of($musics)
                 ->addIndexColumn()
 
@@ -88,6 +88,7 @@ class MusicController extends Controller
             // --- INSERT USING QUERY BUILDER ---
             DB::table('music')->insert([
                 'user_id'     => user()->id,
+                'category_id' => $request->category_id,
                 'title'       => $request->title,
                 'description' => $request->description,
                 'status'      => $request->status,

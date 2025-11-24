@@ -9,6 +9,7 @@ use App\Models\Radio;
 use App\Models\socialMedia;
 use App\Models\schedule;
 use App\Models\User;
+use App\Models\Video;
 use DB;
 use Validator;
 use Auth;
@@ -166,6 +167,10 @@ class ApiController extends Controller
                 $search = $request->get('search');
                 $query->where('title', 'LIKE', "%$search%");
             }
+            if($request->has('category_id'))
+            {
+                $query->where('category_id',$request->category_id);
+            }
             $musics = $query->where('status','Active')->orderBy('id','DESC')->get();
             return response()->json(['status'=>count($musics) > 0, 'data'=>$musics]);
         }catch (Exception $e) {
@@ -252,6 +257,21 @@ class ApiController extends Controller
         {
             auth()->user()->tokens()->delete();
             return response()->json(['status'=>true, 'message'=>'Successfully Logged Out']);
+        }catch (Exception $e) {
+            return response()->json([
+                'status'  => false,
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function topVideos(Request $request)
+    {
+        try
+        {
+            $videos = Video::with('category')->where('is_top','Yes')->where('status','Active')->latest()->get();
+            return response()->json(['status'=>count($videos) > 0, 'data'=>$videos]);
         }catch (Exception $e) {
             return response()->json([
                 'status'  => false,

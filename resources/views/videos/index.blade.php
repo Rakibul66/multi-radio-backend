@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">All Musc</h1>
+                    <h1 class="m-0">All Video</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{URL::to('/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">All Musc</li>
+                        <li class="breadcrumb-item active">All Video</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -22,13 +22,13 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">All Musc</h3>
+                <h3 class="card-title">All Video</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <a href="{{route('musics.create')}}" class="btn btn-primary add-new mb-2">Add New Musc</a>
+                <a href="{{route('videos.create')}}" class="btn btn-primary add-new mb-2">Add New Video</a>
                 <div class="fetch-data table-responsive">
-                    <table id="music-table" class="table table-bordered table-striped data-table">
+                    <table id="video-table" class="table table-bordered table-striped data-table">
                         <thead>
                             <tr>
                                 <th>Title</th>

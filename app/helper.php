@@ -102,3 +102,14 @@
     $setting->applovin_ads_unit = $request->applovin_ads_unit;
     $setting->update();
 }
+
+function getYoutubeId($url) {
+    // Full pattern supports: youtube.com/watch?v=ID, youtu.be/ID, embed, short URLs, etc.
+    $pattern = '%(?:youtube(?:-nocookie)?\.com/(?:.*v=|v/|embed/|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})%';
+
+    if (preg_match($pattern, $url, $matches)) {
+        return $matches[1];
+    }
+
+    return false;
+}

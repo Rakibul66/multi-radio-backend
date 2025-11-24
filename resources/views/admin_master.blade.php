@@ -230,7 +230,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-clock"></i>
               <p>
                 Schedule
                 <i class="fas fa-angle-left right"></i>
@@ -255,7 +255,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-microphone"></i>
               <p>
                 Podcast
                 <i class="fas fa-angle-left right"></i>
@@ -281,7 +281,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-music"></i>
               <p>
                 Music
                 <i class="fas fa-angle-left right"></i>
@@ -298,6 +298,31 @@
                 <a href="{{route('musics.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Music</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-video"></i>
+              <p>
+                Video
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('videos.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Video</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('videos.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Video</p>
                 </a>
               </li>
              

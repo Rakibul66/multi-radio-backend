@@ -11,3 +11,5 @@
  Route::post('radio-status-update', [AjaxController::class, 'radioStatusUpdate']);
 
  Route::post('music-status-update', [AjaxController::class, 'musicStatusUpdate']);
+
+ Route::post('video-status-update', [AjaxController::class, 'videoStatusUpdate']);

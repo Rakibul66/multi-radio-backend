@@ -171,6 +171,7 @@ $(document).ready(function(){
 
         columns: [
             {data: 'title', name: 'title'},
+            {data: 'category_name', name: 'category_name'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -196,7 +197,51 @@ $(document).ready(function(){
                      },
                             
         });
-    }); 
+    });
+
+
+
+     var videoTable = $('#video-table').DataTable({
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        responsive: true,
+        stateSave: true,
+        ajax: {
+          url: base_url+"/videos",
+        },
+
+        columns: [
+            {data: 'title', name: 'title'},
+            {data: 'category', name: 'category'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+
+     $(document).on('click', '.delete-video', function(e){
+        e.preventDefault();
+        var int_video_id = $(this).data('id');
+          if(confirm('Do you want to delete this?'))
+          {
+              ajax_url = base_url+"/videos/"+int_video_id;
+             $.ajax({
+
+                     url: ajax_url,
+                     type:"DELETE",
+                     dataType:"json",
+                     success:function(data) {
+                        $('.data-table').DataTable().ajax.reload(null, false);
+                        toastr.success(data.message);
+
+                     },
+                            
+                });
+          }
+    });
+
 
 
    $(document).on('click', '.delete-music', function(e){
@@ -337,6 +382,28 @@ $(document).ready(function(){
                      url: base_url+"/category-status-update",
                      type:"POST",
                      data:{'category_id':category_id, 'status':status_val},
+                     dataType:"json",
+                     success:function(data) {
+
+                        toastr.success(data.message);
+
+                        $('.data-table').DataTable().ajax.reload(null, false);
+
+                     },
+                            
+        });
+    });
+
+
+    $(document).on('click', '#status-video-update', function(){
+         var video_id = $(this).data('id');
+         var isVideochecked = $(this).prop('checked');
+         var status_val = isVideochecked ? 'Active' : 'Inactive'; 
+         $.ajax({
+
+                     url: base_url+"/video-status-update",
+                     type:"POST",
+                     data:{'video_id':video_id, 'status':status_val},
                      dataType:"json",
                      success:function(data) {
 

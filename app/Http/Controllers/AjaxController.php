@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Radio;
 use App\Models\Music;
+use App\Models\Video;
 use DB;
 
 class AjaxController extends Controller
@@ -63,6 +64,21 @@ class AjaxController extends Controller
             DB::table('music')->where('id',$request->music_id)->update([
                 'status' => $request->status
             ]);
+            return response()->json(['success'=>true, 'message'=>'Succfully the status has been updated']);
+        }catch(Exception $e){
+
+            $code = $e->getCode();           
+            return response()->json(['message'=>'Something went wrong', 'execption_code'=>$code]);
+        }
+    }
+
+    public function videoStatusUpdate(Request $request)
+    {
+        try
+        {
+            $video = Video::findorfail($request->video_id);
+            $video->status = $request->status;
+            $video->update();
             return response()->json(['success'=>true, 'message'=>'Succfully the status has been updated']);
         }catch(Exception $e){
 

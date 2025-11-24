@@ -12,6 +12,7 @@ use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,10 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
  //musics
   Route::resource('musics', MusicController::class);
+
+ //videos
+  Route::resource('videos', VideoController::class);
+
 
   //settings
 

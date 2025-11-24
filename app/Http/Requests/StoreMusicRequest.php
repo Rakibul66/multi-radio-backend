@@ -25,6 +25,7 @@ class StoreMusicRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:50|unique:music,title',
+            'category_id' => 'required|integer|exists:categories,id',
             'description' => 'nullable',
             'file' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',            

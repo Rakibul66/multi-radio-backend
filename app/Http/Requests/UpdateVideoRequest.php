@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMusicRequest extends FormRequest
+class UpdateVideoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,12 @@ class UpdateMusicRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:50|unique:music,title,' . $this->music->id,
+            'title' => 'required|string|max:50',
+            'video_url' => 'required|url',
             'category_id' => 'required|integer|exists:categories,id',
             'description' => 'nullable',
-            'file' => 'nullable|file|mimes:mp3,wav,ogg,flac',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',            
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+            'is_top' => 'required|in:Yes,No',
             'status' => 'required|in:Active,Inactive',
         ];
     }
